@@ -7,26 +7,28 @@ class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 5,
-      shadowColor: Colors.black.withOpacity(0.5),
-      leading: Padding(
-        padding: const EdgeInsets.only(top: 8.0, left: 16.0, bottom: 8.0),
-        child: Image.asset('assets/icons/logo.png', height: 32, width: 32),
-      ),
-      backgroundColor: MyColor.greyVariant,
-      title: const Text(
-        'Clean Care',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          shadows: [
-            Shadow(
-              offset: Offset(1.0, 1.0),
-              blurRadius: 2.0,
-              color: Colors.black54,
+      backgroundColor: Colors.white,
+      centerTitle: true,
+      leading: null,
+      elevation: 0,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset('assets/icons/logo.png', height: 40, width: 40),
+          const SizedBox(width: 8),
+          const Text(
+            'Clean Care',
+            style: TextStyle(
+              color: MyColor.primary,
+              fontWeight: FontWeight.bold,
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1.0),
+        child: Container(color: Colors.grey.shade300, height: 1.0),
       ),
     );
   }

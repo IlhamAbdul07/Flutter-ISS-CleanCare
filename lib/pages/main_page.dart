@@ -21,23 +21,31 @@ class _MainPageState extends State<MainPage> {
       appBar: AppbarWidget(),
       body: [DashboardPage(), WorksPage(), ProfilePage()][index],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: MyColor.greyVariant,
+        backgroundColor: Colors.white,
         selectedItemColor: MyColor.primary,
+        unselectedItemColor: MyColor.secondaryVariant,
         currentIndex: index,
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         onTap: (value) {
           setState(() {
             index = value;
           });
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Dashboard'),
+          BottomNavigationBarItem(icon: Icon(Icons.home, size: 32), label: ''),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_box_outlined),
-            label: 'Works',
+            icon: Icon(Icons.cleaning_services_rounded, size: 32),
+            label: '',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person, size: 32),
+            label: '',
+          ),
         ],
       ),
+      bottomSheet: Container(height: 1, color: MyColor.secondary),
     );
   }
 }

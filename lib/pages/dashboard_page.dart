@@ -10,6 +10,9 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: const Text('Dashboard Page'));
+    return Scaffold(
+      body: const Text('Dashboard Page'),
+      backgroundColor: Colors.white,
+    );
   }
 }
