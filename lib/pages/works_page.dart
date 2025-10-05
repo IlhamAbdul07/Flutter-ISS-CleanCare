@@ -10,6 +10,10 @@ class WorksPage extends StatefulWidget {
 class _WorksPageState extends State<WorksPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: const Text('Works Page'));
+    return Scaffold(body: buildUI());
+  }
+
+  Widget buildUI() {
+    return Center(child: Text('Works Page'));
   }
 }

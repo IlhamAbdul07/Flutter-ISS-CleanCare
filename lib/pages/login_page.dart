@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:iss_cleancare/constants/my_color.dart';
 import 'package:iss_cleancare/constants/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -119,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 50,
                     child: TextField(
                       controller: idController,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.black),
                       decoration: const InputDecoration(
                         hintText: 'Employee ID',
                         border: OutlineInputBorder(

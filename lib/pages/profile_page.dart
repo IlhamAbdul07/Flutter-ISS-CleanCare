@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iss_cleancare/constants/dialog_box.dart';
+import 'package:iss_cleancare/widgets/profile_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -9,12 +11,39 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  Future<void> _confirmLogout(BuildContext context) async {
+    debugPrint('✅ _confirmLogout() dipanggil');
+    await DialogBox.showDialogConfirm(
+      context: context,
+      icon: const Icon(Icons.logout, color: Colors.white, size: 36),
+      title: 'Logout?',
+      message: 'Apakah kamu yakin ingin keluar dari akun ini?',
+      mainColor: Colors.red,
+      subColor: Colors.redAccent.shade100,
+      confirmText: 'Ya, keluar',
+      cancelText: 'Batal',
+      confirmButtonColor: Colors.red.shade700,
+      onConfirm: () async {
+        Navigator.of(context).pop();
+        await _logout(context);
+      },
+      onCancel: () {
+        debugPrint('❌ Tombol Batal ditekan');
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
   Future<void> _logout(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool("isLoggedIn", false);
 
-    if (mounted) {
-      Navigator.pushReplacementNamed(context, "/login");
+    if (!mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const ProfilePage()),
+      );
+      // Navigator.pushReplacementNamed(context, "/login");
     }
   }
 
@@ -22,42 +51,14 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const CircleAvatar(radius: 50, child: Icon(Icons.person, size: 80)),
-            const SizedBox(height: 24),
-            const Text(
-              'John Doe',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            const Text('Division: IT', style: TextStyle(fontSize: 16)),
-            const SizedBox(height: 8),
-            const Text(
-              'Email: johndoe@example.com',
-              style: TextStyle(fontSize: 16),
-            ),
-            const Spacer(),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                onPressed: () => _logout(context),
-                child: const Text(
-                  'Logout',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-              ),
-            ),
-          ],
+      appBar: AppBar(
+        title: const Text(
+          'Profile',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
         ),
+        backgroundColor: Colors.white,
       ),
+      body: ProfileWidget(onLogout: () => _confirmLogout(context)),
     );
   }
 }
