@@ -7,6 +7,7 @@ import 'package:iss_cleancare/pages/register_page.dart';
 import 'package:iss_cleancare/pages/works_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() {
   runApp(const MyApp());
 }
